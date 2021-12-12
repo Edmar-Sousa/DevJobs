@@ -1,0 +1,14 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    --primary-color: rgb(2, 172, 72);
+    --background-light-color: rgb(243, 243, 243);
+    --search-background: rgb(255, 255, 255);
+
+    --font-light-color: rgb(245, 245, 245);
+    --font-dark-color : rgb(1, 0, 19);
+}
