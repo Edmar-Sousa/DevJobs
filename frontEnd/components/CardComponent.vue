@@ -1,5 +1,5 @@
 <template>
-    <div class="card-container">
+    <div class="card-container" v-bind:class="{ 'dark' : theme }">
         <i class="fab fa-python"></i>
 
         <p>12/12/2021 10:40 - Full Time</p>
@@ -17,7 +17,8 @@
 import Vue from 'vue'
 
 export default Vue.extend({
-    name : 'card-component'
+    name : 'card-component',
+    props : ['theme']
 })
 
 </script>
@@ -28,13 +29,18 @@ div.card-container {
     flex: 1;
     margin: 20px;
 
-    background: rgb(255, 255, 255);
+    background: var(--card-background-color);
     position: relative;
 
     font-family: Roboto, Arial, Helvetica, sans-serif;
     border-radius: 5px;
 
+    transition: background 400ms;
     padding: 0 20px 20px;
+}
+
+div.card-container.dark {
+    background: var(--card-dark-background);
 }
 
 div.card-container  i {

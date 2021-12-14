@@ -1,5 +1,5 @@
 <template>
-    <div class="search-container">
+    <div class="search-container" v-bind:class="{ 'dark' : theme }">
         <div class="box-search">
             <i class="fas fa-search"></i>
             <input type="text" placeholder="Filter by title">
@@ -29,7 +29,9 @@
 import Vue from 'vue'
 
 export default Vue.extend({
-    name : 'search-component'
+    name : 'search-component',
+
+    props : ['theme']
 })
 
 </script>
@@ -41,10 +43,14 @@ div.search-container {
 
     margin: -20px auto;
     border-radius: 5px;
+    transition: background 400ms;
 
     display: flex;
+    background: var(--search-light-background);
+}
 
-    background: var(--search-background);
+div.search-container.dark  {
+    background: var(--search-dark-background);
 }
 
 div.search-container i {
@@ -54,13 +60,20 @@ div.search-container i {
 div.search-container input {
     width: 90%;
     height: 35px;
-    padding: 0 5px;
+    padding: 0 10px;
 
     font-family: Roboto, Arial, Helvetica, sans-serif;
     font-size: 12pt;
 
+    transition: background 400ms;
+
     border: none;
     outline: none;
+}
+
+div.search-container.dark input {
+    background: var(--search-dark-background);
+    color: var(--font-light-color);
 }
 
 div.search-container div.box-search {

@@ -1,7 +1,7 @@
 <template>
     <header class="header">
         <button v-on:click="changeTheme">
-            {{ pageLightTheme ? 'DARK' : 'LIGHT' }}
+            {{ !pageDarkTheme ? 'DARK' : 'LIGHT' }}
             <i class="fas" v-bind:class="iconThemeClass"></i>
         </button>
     </header>
@@ -15,15 +15,17 @@ export default Vue.extend({
 
     data() {
         return {
-            pageLightTheme : true,
-            iconThemeClass : 'fa-moon' // 'fa-sun'
+            pageDarkTheme : true,
+            iconThemeClass : 'fa-sun'
         }
     },
 
     methods : {
         changeTheme : function() {
-            this.pageLightTheme = !this.pageLightTheme
-            this.iconThemeClass =  this.pageLightTheme ? 'fa-moon' : 'fa-sun'
+            this.pageDarkTheme = !this.pageDarkTheme
+            this.iconThemeClass =  this.pageDarkTheme ? 'fa-sun' : 'fa-moon'
+
+            this.$emit('changeTheme', this.pageDarkTheme)
         }
     }
 })

@@ -7,8 +7,13 @@
 html {
     --primary-color: rgb(2, 172, 72);
     --background-light-color: rgb(243, 243, 243);
-    --search-background: rgb(255, 255, 255);
+    --background-dark-color: rgb(7, 0, 26);
+    --search-light-background: rgb(255, 255, 255);
+    --search-dark-background: rgb(25, 15, 49);
 
     --font-light-color: rgb(245, 245, 245);
     --font-dark-color : rgb(1, 0, 19);
+
+    --card-background-color: rgb(255, 255, 255);
+    --card-dark-background: rgb(25, 15, 49);
 }
