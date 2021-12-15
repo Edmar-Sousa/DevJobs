@@ -10,7 +10,7 @@
                 v-on:click="changeValue(value)"
 
             >
-                {{ value }}
+                <p>{{ value }}</p>
             </div>
         </div>
     </div>
@@ -62,6 +62,7 @@ div.custom-select {
 
 div.custom-select p {
     padding: 0 10px;
+    font-size: max(12px, 1.2vw);
 }
 
 div.select-items {

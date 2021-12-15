@@ -21,7 +21,9 @@
                 v-bind:theme="theme"
                 title="Filter by time" 
                 v-bind:itemsArray="['Full Time', 'Part Time', 'Integral']"/>
-            
+        </div>
+        
+        <div class="box-search">
             <button class="button-search">Search</button>
         </div>
     </div>
@@ -81,14 +83,20 @@ div.search-container.dark input {
 div.search-container div.box-search {
     flex: 1;
     padding: 20px;
-    border-right: 1px solid rgba(59, 59, 59, 0.397);
+    border-left: 1px solid rgba(59, 59, 59, 0.397);
 
     display: flex;
     align-items: center;
 }
 
-div.search-container div.box-search:last-child {
-    border-right: none;
+div.search-container div.box-search:first-child {
+    border-left: none;
+}
+
+div.search-container div.box-search:last-child  {
+    flex: none;
+    border-left: none;
+    justify-content: right;
 }
 
 div.search-container button.button-search {
@@ -108,6 +116,30 @@ div.search-container button.button-search {
 
 button.button-search:hover {
     transform: scale(0.95);
+}
+
+@media (max-width: 738px) {
+    div.search-container {
+        display: grid;
+        grid-template-rows: 1fr 1fr;
+        grid-template-columns: 1fr 1fr;
+        grid-template-areas: "input button"
+                             "card1 card2";
+
+        /** */
+    }
+
+    div.search-container div.box-search {
+        border: none;
+    }
+
+    div.search-container div.box-search:nth-child(1) {
+        grid-area: input;
+    }
+
+    div.search-container div.box-search:nth-child(4) {
+        grid-area: button;
+    }
 }
 
 </style>

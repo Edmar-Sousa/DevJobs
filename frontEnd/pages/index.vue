@@ -58,6 +58,15 @@ div.job-container {
     padding: 30px 10px;
 
     display: flex;
+    flex-wrap: wrap;
 }
+
+@media (max-width: 720px) {
+    div.job-container {
+        display: flex;
+        flex-direction: column;
+    }
+}
+
 
 </style>

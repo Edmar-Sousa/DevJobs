@@ -54,10 +54,16 @@ div.card-container  i {
     background: rgb(190, 137, 21);
 }
 
+div.card-container h2 {
+    font-size: max(20px, 2vw);
+}
+
 div.card-container p {
     margin: 10px 0;
     color: rgb(161, 161, 161);
     font-size: 10pt;
+
+    font-size: max(15px, 1vw);
 }
 
 div.card-container p.local {
@@ -77,5 +83,4 @@ div.card-container button {
 div.card-container button:hover {
     transform: scale(0.95);
 }
-
 </style>
