@@ -9,6 +9,7 @@
             <i class="fas fa-map-marker-alt"></i>
 
             <select-component 
+                v-bind:theme="theme"
                 title="Filter by localization" 
                 v-bind:itemsArray="['CE', 'SP', 'RJ', 'PI']"/>
         </div>
@@ -17,6 +18,7 @@
             <i class="fas fa-clock"></i>
 
             <select-component 
+                v-bind:theme="theme"
                 title="Filter by time" 
                 v-bind:itemsArray="['Full Time', 'Part Time', 'Integral']"/>
             

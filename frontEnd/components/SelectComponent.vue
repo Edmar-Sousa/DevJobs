@@ -4,9 +4,11 @@
 
         <div class="select-items" v-if="activate">
             <div class="option" 
+                v-bind:class="{ 'dark' : theme }"
                 v-for="(value, index) in itemsArray"
                 v-bind:key="index"
                 v-on:click="changeValue(value)"
+
             >
                 {{ value }}
             </div>
@@ -23,6 +25,7 @@ export default Vue.extend({
     props : {
         title : String,
         itemsArray : [],
+        theme : Boolean
     },
 
     data() {
@@ -78,7 +81,12 @@ div.option {
 
     transition: background 400ms;
 
-    background: var(--search-background);
+    z-index: 5;
+    background: var(--search-light-background);
+}
+
+div.option.dark {
+    background: var(--search-dark-background);
 }
 
 div.option:last-child {
