@@ -3,7 +3,7 @@ export default {
   head: {
     title: 'devjob',
     htmlAttrs: {
-      lang: 'en'
+      lang: 'pt-br'
     },
     meta: [
       { charset: 'utf-8' },

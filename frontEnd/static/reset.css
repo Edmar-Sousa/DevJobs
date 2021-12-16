@@ -5,15 +5,21 @@
 }
 
 html {
-    --primary-color: rgb(2, 172, 72);
-    --background-light-color: rgb(243, 243, 243);
-    --background-dark-color: rgb(7, 0, 26);
-    --search-light-background: rgb(255, 255, 255);
-    --search-dark-background: rgb(25, 15, 49);
+    font-size: 62.5%;
+}
 
-    --font-light-color: rgb(245, 245, 245);
-    --font-dark-color : rgb(1, 0, 19);
+body {
+    font-size: 1.6rem;
+}
 
-    --card-background-color: rgb(255, 255, 255);
-    --card-dark-background: rgb(25, 15, 49);
+html {
+    --primary-color: rgb(5, 184, 79);
+    --background-light-color: rgb(240, 240, 240);
+    --background-dark-color: rgb(0, 10, 31);
+
+    --background-light-color2: rgb(255, 255, 255);
+    --background-dark-color2: rgb(8, 17, 37);
+
+    --text-dark-theme-color: rgb(235, 235, 235);
+    --text-light-theme-color: rgb(0, 0, 0);
 }
