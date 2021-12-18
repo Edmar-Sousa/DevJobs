@@ -10,3 +10,4 @@ End-points em `localhost:8000`
     PUT    /jobs/:id   -> Usado para atualizar o "job" com o "id"
     POST   /jobs       -> Criar um novo "job" registro
     DELETE /jobs/:id   -> Deletar o "job" com o resrespectivo "id"
+
