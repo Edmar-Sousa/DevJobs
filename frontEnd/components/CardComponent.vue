@@ -1,5 +1,5 @@
 <template>
-    <div class="jobs__card">
+    <div class="jobs__card" v-bind:class="{ 'light' : this.lightThemeActive }">
         <div class="jobs__card--icon">
             <i class="fab fa-python"></i>
         </div>
@@ -24,11 +24,23 @@
     </div>
 </template>
 
-<script>
+<script lang="ts">
 import Vue from 'vue'
 
 export default Vue.extend({
-    name : 'card-component'
+    name : 'card-component',
+
+    data() {
+        return {
+            lightThemeActive: false,
+        }
+    },
+
+    created : function () {
+        this.$nuxt.$on('changeTheme', (data : boolean) => {
+            this.lightThemeActive = data
+        })
+    } 
 })
 
 </script>
@@ -45,6 +57,13 @@ div.jobs__card {
 
     background: var(--background-dark-color2);
     color: var(--text-dark-theme-color);
+
+    transition: background 400ms;
+}
+
+div.jobs__card.light {
+    background: var(--background-light-color2);
+    color: var(--text-light-theme-color);
 }
 
 div.jobs__card h2 {
@@ -59,6 +78,10 @@ div.jobs__card p {
 
 p.jobs__card--info {
     font-size: 1.1rem;
+}
+
+.jobs__card--date {
+    color: rgb(121, 121, 121);
 }
 
 .jobs__card--local {

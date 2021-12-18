@@ -1,8 +1,8 @@
 <template>
     <header class="header">
-        <button class="header__button">
-            <i class="fa fa-sun"></i>
-            LIGHT
+        <button class="header__button" v-on:click="changeTheme" >
+            <i class="fa" v-bind:class="classFromIcon"></i>
+            {{ this.lightThemeActive ? 'DARK' : 'LIGHT' }}
         </button>
     </header>
 </template>
@@ -11,7 +11,24 @@
 import Vue from 'vue'
 
 export default Vue.extend({
-    name : 'header-component'
+    name : 'header-component',
+
+    data() {
+        return {
+            classFromIcon : 'fa-sun',
+            lightThemeActive: false,
+        }
+    },
+
+    methods : {
+        changeTheme : function () {
+            this.lightThemeActive = !this.lightThemeActive
+            this.classFromIcon = this.lightThemeActive ? 'fa-moon' : 'fa-sun'
+
+            console.log('ok')
+            this.$nuxt.$emit('changeTheme', this.lightThemeActive)
+        }
+    }
 })
 
 </script>

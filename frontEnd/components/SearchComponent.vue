@@ -1,5 +1,5 @@
 <template>
-    <section class="search">
+    <section class="search" v-bind:class="{ 'light' : this.lightThemeActive }">
         <div class="search__row">
             <div class="search__card">
                 <i class="fas fa-search"></i>
@@ -13,21 +13,39 @@
 
         <div class="search__row">
             <div class="search__card">
-                <select-component title="Filter by local" />
+                <select-component 
+                    title="Filter by local" 
+                    icon="fa-map-marker-alt"
+                    v-bind:items="['Ocara', 'Fortaleza', 'São Paulo']" />
             </div>
 
             <div class="search__card">
-                <select-component title="Filter by Time" />
+                <select-component 
+                    title="Filter by Time" 
+                    icon="fa-clock"
+                    v-bind:items="['Part Time', 'Full time', 'Integral']"/>
             </div>
         </div>
     </section>
 </template>
 
-<script>
+<script lang="ts">
 import Vue from 'vue'
 
 export default Vue.extend({
-    name : 'search-component'    
+    name : 'search-component',
+
+    data() {
+        return {
+            lightThemeActive: false,
+        }
+    },
+
+    created : function () {
+        this.$nuxt.$on('changeTheme', (data : boolean) => {
+            this.lightThemeActive = data
+        })
+    } 
 })
 
 </script>
@@ -43,12 +61,19 @@ section.search {
     border-radius: 5px;
 
     background: var(--background-dark-color2);
+    transition: background 400ms;
+}
+
+section.search.light {
+    background: var(--background-light-color2);
 }
 
 section.search .search__row {
     display: flex;
     align-items: center;
     justify-content: space-between;
+
+    padding-top: 5px;
 }
 
 section.search input.search__field {
@@ -63,12 +88,20 @@ section.search input.search__field {
     outline: none;
 }
 
+section.search.light input.search__field {
+    color: var(--text-light-theme-color);
+}
+
 section.search .search__card i {
     color: var(--icons-color);
 }
 
 input.search__field::placeholder {
-    color: rgb(238, 238, 238);
+    color: var(--text-dark-theme-color);
+}
+
+section.search.light input.search__field::placeholder {
+    color: var(--text-light-theme-color);
 }
 
 section.search .search__button {

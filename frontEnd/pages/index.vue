@@ -17,7 +17,6 @@ import Vue from 'vue'
 
 export default Vue.extend({
     name : 'index',
-    layout : 'default'
 })
 </script>
 
@@ -30,7 +29,7 @@ main.jobs {
     width: 90%;
     padding: 20px 0;
 
-    margin: 20px auto;
+    margin: auto;
     border-radius: 5px;
 }
 
