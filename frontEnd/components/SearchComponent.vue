@@ -56,7 +56,8 @@ export default Vue.extend({
 section.search {
     width: 90%;
     padding: 20px 10px;
-    margin: -30px auto 0;
+    margin: -30px auto;
+    margin-bottom: 0;
 
     border-radius: 5px;
 
@@ -117,6 +118,23 @@ section.search .search__button {
 
     border-radius: 5px;
     border: none;
-}/* end-search */
+}
+
+@media (min-width: 760px) {
+    section.search {
+        display: flex;
+        justify-content: space-around;
+    }
+
+    div.search__row {
+        width: 40%;
+    }
+
+    div.search__row:last-child {
+        margin-left: 20px;
+    }
+}
+
+/* end-search */
 
 </style>

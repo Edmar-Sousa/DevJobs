@@ -1,5 +1,5 @@
 <template>
-    <div class="container" v-bind:class="{ 'light' : this.lightThemeActive }">
+    <div class="page__container" v-bind:class="{ 'light' : this.lightThemeActive }">
         <header-component />
         <nuxt />
     </div>
@@ -26,9 +26,12 @@ export default Vue.extend({
 
 <style>
 
-div.container {
+div.page__container {
+    max-width: 1500px;
     width: 100vw;
     min-height: 100vh;
+
+    margin: auto;
 
     background: var(--background-dark-color);
     font-family: Roboto, Arial, Helvetica, sans-serif;
@@ -36,7 +39,7 @@ div.container {
     transition: background 400ms;
 }
 
-div.container.light {
+div.page__container.light {
     background: var(--background-light-color);
 }
 

@@ -1,5 +1,7 @@
 <template>
     <header class="header">
+        <h1>DevJobs</h1>
+
         <button class="header__button" v-on:click="changeTheme" >
             <i class="fa" v-bind:class="classFromIcon"></i>
             {{ this.lightThemeActive ? 'DARK' : 'LIGHT' }}
@@ -44,9 +46,13 @@ header.header {
     border-bottom-left-radius: 50px;
 
     display: flex;
-    justify-content: right;
+    justify-content: space-between;
 
-    padding: 10px 10px 0 0;
+    padding: 20px;
+}
+
+header.header h1 {
+    font-size: 2rem;
 }
 
 header.header .header__button {
