@@ -16,7 +16,7 @@
                 <select-component 
                     title="Filter by local" 
                     icon="fa-map-marker-alt"
-                    v-bind:items="['Ocara', 'Fortaleza', 'São Paulo']" />
+                    v-bind:items="statesOfBrazil" />
             </div>
 
             <div class="search__card">
@@ -38,12 +38,19 @@ export default Vue.extend({
     data() {
         return {
             lightThemeActive: false,
+            statesOfBrazil : []
         }
     },
 
     created : function () {
         this.$nuxt.$on('changeTheme', (data : boolean) => {
             this.lightThemeActive = data
+        })
+
+        this.$axios.$get("http://www.geonames.org/childrenJSON?geonameId=3469034").then(statesReponse => {
+            this.statesOfBrazil = statesReponse.geonames.map((state : any) => {
+                return state.adminCodes1.ISO3166_2
+            })
         })
     } 
 })

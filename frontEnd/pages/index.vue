@@ -31,6 +31,10 @@ main.jobs {
 
     margin: auto;
     border-radius: 5px;
+
+    display: grid;
+    grid-gap: 20px;
+    grid-template-columns: repeat(auto-fit, minmax(290px, 1fr));
 }
 
 /* end-jobs */

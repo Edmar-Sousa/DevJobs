@@ -9,14 +9,16 @@
         </div>
 
         <div class="select__options" v-if="selectedActive">
-            <ul>
-                <li 
-                    v-for="(item, index) in items" 
-                    v-bind:key="index"
-                    v-on:click="seletedItem(item)">
-                    {{ item }}
-                </li>
-            </ul>
+            <div class="options__container">
+                <ul>
+                    <li 
+                        v-for="(item, index) in items" 
+                        v-bind:key="index"
+                        v-on:click="seletedItem(item)">
+                        {{ item }}
+                    </li>
+                </ul>
+            </div>
         </div>
     </div>
 </template>
@@ -55,8 +57,6 @@ export default Vue.extend({
 
 /* select */
 div.select {
-    position: relative;
-
     min-width: 110px;
 
     color: var(--text-dark-theme-color);
@@ -77,18 +77,22 @@ div.select p {
 } 
 
 div.select ul {
+    display: grid;
+
+    grid-template-rows: repeat(auto-fit, 40px);
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+
+    height: 100%;
+    
     list-style: none;
 }
 
 div.select ul li {
     padding: 5px;
+    line-height: 35px;
     transition: background 400ms;
 }
 
-div.select ul li:last-child{
-    border-bottom-left-radius:  5px;
-    border-bottom-right-radius: 5px;
-}
 
 div.select ul li:hover {
     background: var(--primary-color);
@@ -96,12 +100,29 @@ div.select ul li:hover {
 
 
 div.select__options {
-    position: absolute;
+    position: fixed;
     width: 100%;
 
+    top:    0;
+    left:   0;
+    right:  0;
+    bottom: 0;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
     background: var(--background-dark-color2);
+
     border-bottom-left-radius:  5px;
     border-bottom-right-radius: 5px;
+}
+
+div.select div.options__container {
+    width: 90%;
+    height: 90%;
+
+    overflow-y: auto;
 }
 
 div.select.light .select__options {
