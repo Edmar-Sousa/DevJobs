@@ -48,12 +48,12 @@ class JobController {
 
 
     public create(request : Request, response : Response) {
-        const { title, time, description, technology } = request.body
+        const { title, time, description, technology, location } = request.body
 
-        if (!title || !time || !description || !technology)
+        if (!title || !time || !description || !technology || !location)
             return response.status(STATUS_BAD_REQUEST).json({ message : 'some fields is invalid.' })
 
-        return knex('jobs').insert({ title, time, description, technology })
+        return knex('jobs').insert({ title, time, description, technology, location })
             .then((data : any) => {
                 return response
                     .status(STATUS_OK)
@@ -96,13 +96,13 @@ class JobController {
             return response.status(STATUS_BAD_REQUEST).json({ message : 'Job id is required.' })
 
 
-        const { title, time, description, technology } = request.body
+        const { title, time, description, technology, location } = request.body
 
-        if (!title || !time || !description || !technology)
+        if (!title || !time || !description || !technology || !location)
             return response.status(STATUS_BAD_REQUEST).json({ message : 'Some fields is invalid.' })
         
 
-        return knex('jobs').where('jobId', jobId).update({ title, time, description, technology })
+        return knex('jobs').where('jobId', jobId).update({ title, time, description, technology, location })
             .then((data : any) => {
                 return response
                     .status(STATUS_OK)

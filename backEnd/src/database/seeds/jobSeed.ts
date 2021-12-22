@@ -10,21 +10,24 @@ export async function seed(knex: Knex): Promise<void> {
             title : 'Python Senior Developer', 
             time : 'Full time',
             description : 'this is work to Senior developer',
-            technology : 'Python'
+            technology : 'python',
+            location: 'CE',
         },
 
         { 
             title : 'Node Senior Developer', 
             time : 'Part time',
             description : 'this is work to Senior developer',
-            technology : 'Node'
+            technology : 'node',
+            location: 'CE',
         },
         
         { 
             title : 'Java Senior Developer', 
             time : 'Part time',
             description : 'this is work to Senior developer',
-            technology : 'Java'
+            technology : 'java',
+            location: 'CE',
         },
     ]);
 };

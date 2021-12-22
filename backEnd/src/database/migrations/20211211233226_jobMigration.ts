@@ -8,6 +8,7 @@ export async function up(knex: Knex): Promise<void> {
         table.string('time')
         table.string('description')
         table.string('technology')
+        table.string('location')
         table.timestamp('created_at').defaultTo(knex.fn.now())
     })
 }
