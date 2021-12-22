@@ -6,14 +6,11 @@
 
         <div>
             <p class="jobs__card--date">
-                10/10/1010 - 10:45 - Full Time
+                {{ createdAt }} - {{ time }}
             </p>
 
-            <h2>Python software developer</h2>
-            <p>
-                Lorem ipsum dolor sit, amet consectetur adipisicing elit.
-                Impedit, aperiam mollitia aspernatur soluta harum repudiandae molestiae.
-            </p>
+            <h2>{{ title }}</h2>
+            <p>{{ description }}</p>
 
             <p class="jobs__card--local">Ceará</p>
 
@@ -29,6 +26,11 @@ import Vue from 'vue'
 
 export default Vue.extend({
     name : 'card-component',
+
+    props : [
+        'jobId', 'createdAt', 'description', 
+        'technology', 'time', 'title'
+    ],
 
     data() {
         return {

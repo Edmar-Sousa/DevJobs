@@ -27,7 +27,6 @@ export default Vue.extend({
             this.lightThemeActive = !this.lightThemeActive
             this.classFromIcon = this.lightThemeActive ? 'fa-moon' : 'fa-sun'
 
-            console.log('ok')
             this.$nuxt.$emit('changeTheme', this.lightThemeActive)
         }
     }

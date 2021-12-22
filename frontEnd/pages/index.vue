@@ -4,9 +4,18 @@
         <search-component />
 
         <main class="jobs">
-            <card-component />
-            <card-component />
-            <card-component />
+            <component 
+                v-for="(job, index) in jobsList"
+                v-bind:key="index"
+                v-bind:is="'card-component'"
+
+                v-bind:jobId      ="job.jobId"
+                v-bind:createdAt  ="job.created_at"
+                v-bind:description="job.description"
+                v-bind:technology ="job.technology"
+                v-bind:time       ="job.time"
+                v-bind:title      ="job.title"
+            />
         </main> 
 
     </div>
@@ -17,6 +26,20 @@ import Vue from 'vue'
 
 export default Vue.extend({
     name : 'index',
+
+    data() {
+        return {
+            jobsList : []
+        }
+    },
+
+    created() {
+        this.$axios.$get('http://localhost:8000/jobs')
+            .then((response : any) => this.jobsList = response)
+            .catch((err : any) => {
+                console.log(err)
+            })
+    }
 })
 </script>
 
