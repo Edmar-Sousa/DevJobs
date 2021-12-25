@@ -3,11 +3,11 @@
         <div class="search__row">
             <div class="search__card">
                 <i class="fas fa-search"></i>
-                <input type="text" class="search__field" placeholder="Filter by title">
+                <input type="text" class="search__field" v-model="searchValue" placeholder="Filter by title">
             </div>
 
             <div class="search__card">
-                <button class="search__button">Search</button>
+                <button class="search__button" v-on:click="filterByTitle">Search</button>
             </div>
         </div>
 
@@ -16,14 +16,16 @@
                 <select-component 
                     title="Filter by local" 
                     icon="fa-map-marker-alt"
-                    v-bind:items="statesOfBrazil" />
+                    v-bind:items="statesOfBrazil"
+                    v-on:changeSelect="changeLocal" />
             </div>
 
             <div class="search__card">
                 <select-component 
                     title="Filter by Time" 
                     icon="fa-clock"
-                    v-bind:items="['Part Time', 'Full time', 'Integral']"/>
+                    v-bind:items="['Part time', 'Full time', 'Integral']"
+                    v-on:changeSelect="changeTime" />
             </div>
         </div>
     </section>
@@ -38,6 +40,7 @@ export default Vue.extend({
     data() {
         return {
             lightThemeActive: false,
+            searchValue : '',
             statesOfBrazil : []
         }
     },
@@ -52,7 +55,21 @@ export default Vue.extend({
                 return state.adminCodes1.ISO3166_2
             })
         })
-    } 
+    },
+
+    methods : {
+        changeLocal : function (value : string) {
+            this.$emit('changeLocal', value)
+        },
+
+        changeTime : function (value : string) {
+            this.$emit('changeTime', value)
+        },
+
+        filterByTitle : function () {
+            this.$emit('filterByTitle', this.searchValue)
+        }
+    }
 })
 
 </script>

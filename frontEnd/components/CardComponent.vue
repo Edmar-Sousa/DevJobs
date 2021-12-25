@@ -12,7 +12,7 @@
             <h2>{{ title }}</h2>
             <p>{{ description }}</p>
 
-            <p class="jobs__card--local">Ceará</p>
+            <p class="jobs__card--local">{{ location }}</p>
 
             <div class="right-align">
                 <button class="jobs__button">Details</button>
@@ -29,7 +29,7 @@ export default Vue.extend({
 
     props : [
         'jobId', 'createdAt', 'description', 
-        'technology', 'time', 'title'
+        'technology', 'time', 'title', 'location'
     ],
 
     data() {

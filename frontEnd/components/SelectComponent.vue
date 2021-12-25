@@ -47,6 +47,7 @@ export default Vue.extend({
     methods : {
         seletedItem : function (item : string) {
             this.textOfSelectedItem = item
+            this.$emit('changeSelect', this.textOfSelectedItem)
         }
     }
 })

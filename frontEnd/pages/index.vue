@@ -1,11 +1,15 @@
 <template>
     <div>
         <nuxt />
-        <search-component />
+        <search-component
+            v-on:filterByTitle="filterByTitle"
+            v-on:changeLocal="filterByLocal"
+            v-on:changeTime ="filterByTime"
+        />
 
         <main class="jobs">
             <component 
-                v-for="(job, index) in jobsList"
+                v-for="(job, index) in filteredJobs"
                 v-bind:key="index"
                 v-bind:is="'card-component'"
 
@@ -15,6 +19,7 @@
                 v-bind:technology ="job.technology"
                 v-bind:time       ="job.time"
                 v-bind:title      ="job.title"
+                v-bind:location   ="job.location"
             />
         </main> 
 
@@ -29,8 +34,54 @@ export default Vue.extend({
 
     data() {
         return {
-            jobsList : []
+            titleFilter : '',
+            localFilter : '',
+            timeFilter  : '',
+            jobsList : [],
         }
+    },
+
+    computed : {
+        filteredJobs : function () : any {
+            return this.applyFilter()
+        }
+    },
+
+    methods : {
+        applyFilter : function () {
+            return this.applyTitleFilter()
+        },
+
+        applyTitleFilter : function () {
+            return this.applyLocalFilter().filter(
+                job => job.title.toLowerCase().includes(this.titleFilter.toLowerCase())
+            )
+        },
+
+        applyLocalFilter : function () {
+            return this.applyTimeFilter().filter(
+                job => this.localFilter == '' ? job : job.location == this.localFilter
+            )
+        },
+
+        applyTimeFilter : function () {
+            return this.jobsList.filter(
+                job => this.timeFilter == '' ? job : job.time == this.timeFilter
+            )
+        },
+
+
+        filterByLocal : function (value : string) {
+            this.localFilter = value
+        },
+
+        filterByTime : function (value : string) {
+            this.timeFilter = value
+        },
+
+        filterByTitle : function (value : string) {
+            this.titleFilter = value
+        },
     },
 
     created() {
