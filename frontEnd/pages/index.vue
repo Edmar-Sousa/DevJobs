@@ -85,7 +85,7 @@ export default Vue.extend({
     },
 
     created() {
-        this.$axios.$get('http://localhost:8000/jobs')
+        this.$axios.$get('/jobs')
             .then((response : any) => this.jobsList = response)
             .catch((err : any) => {
                 console.log(err)
