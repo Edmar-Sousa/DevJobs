@@ -32,6 +32,7 @@ div.page__container {
     min-height: 100vh;
 
     margin: auto;
+    padding-bottom: 20px;
 
     background: var(--background-dark-color);
     font-family: Roboto, Arial, Helvetica, sans-serif;

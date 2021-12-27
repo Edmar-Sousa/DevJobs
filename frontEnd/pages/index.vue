@@ -29,6 +29,16 @@
 <script lang="ts">
 import Vue from 'vue'
 
+interface JobType {
+    jobId       : string
+    created_at  : string
+    description : string
+    technology  : string
+    time        : string
+    title       : string
+    location    : string
+}
+
 export default Vue.extend({
     name : 'index',
 
@@ -54,19 +64,19 @@ export default Vue.extend({
 
         applyTitleFilter : function () {
             return this.applyLocalFilter().filter(
-                job => job.title.toLowerCase().includes(this.titleFilter.toLowerCase())
+                (job : JobType) => job.title.toLowerCase().includes(this.titleFilter.toLowerCase())
             )
         },
 
         applyLocalFilter : function () {
             return this.applyTimeFilter().filter(
-                job => this.localFilter == '' ? job : job.location == this.localFilter
+                (job : JobType) => this.localFilter == '' || this.localFilter == 'All' ? job : job.location == this.localFilter
             )
         },
 
         applyTimeFilter : function () {
             return this.jobsList.filter(
-                job => this.timeFilter == '' ? job : job.time == this.timeFilter
+                (job : JobType) => this.timeFilter == '' || this.timeFilter == 'All' ? job : job.time == this.timeFilter
             )
         },
 

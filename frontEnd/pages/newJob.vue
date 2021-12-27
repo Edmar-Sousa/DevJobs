@@ -135,7 +135,8 @@ div.modal {
 div.form__container {
     width: 90%;
 
-    padding: 30px 10px;
+    padding: 30px 10px 10px;
+
     margin: 20px auto;
     margin-bottom: 0;
 

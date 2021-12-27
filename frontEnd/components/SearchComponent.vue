@@ -50,7 +50,7 @@ export default Vue.extend({
             this.lightThemeActive = data
         })
 
-        this.$axios.$get("http://www.geonames.org/childrenJSON?geonameId=3469034").then(statesReponse => {
+        this.$axios.$get('http://www.geonames.org/childrenJSON?geonameId=3469034').then(statesReponse => {
             this.statesOfBrazil = statesReponse.geonames.map((state : any) => {
                 return state.adminCodes1.ISO3166_2
             })

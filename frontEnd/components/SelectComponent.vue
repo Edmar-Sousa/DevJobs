@@ -11,6 +11,8 @@
         <div class="select__options" v-if="selectedActive">
             <div class="options__container">
                 <ul>
+                    <li v-on:click="seletedItem('All')">All</li>
+
                     <li 
                         v-for="(item, index) in items" 
                         v-bind:key="index"

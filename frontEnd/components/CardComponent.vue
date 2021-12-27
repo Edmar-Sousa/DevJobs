@@ -97,6 +97,11 @@ p.jobs__card--info {
     border-radius: 5px;
     border: none;
     background: var(--primary-color);
+    cursor: pointer;
+}
+
+.jobs__button:hover {
+    transform: scale(0.95);
 }
 
 .right-align {
