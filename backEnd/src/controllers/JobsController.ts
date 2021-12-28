@@ -9,7 +9,7 @@ const STATUS_OK             = 200,
       STATUS_NOT_FOUND      = 404,
       STATUS_INTERNAL_ERROR = 500
 
-class JobController {
+export class JobController {
     public index(request : Request, response : Response) {
         return knex.select('*').from('jobs')
             .then((data : JobTable[]) => {
@@ -116,5 +116,3 @@ class JobController {
             })
     }
 }
-
-export default JobController
