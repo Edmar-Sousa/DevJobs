@@ -15,7 +15,7 @@
             <p class="jobs__card--local">{{ location }}</p>
 
             <div class="right-align">
-                <button class="jobs__button">Details</button>
+                <button class="jobs__button" v-on:click="viewDetails(jobId)">Details</button>
             </div>
         </div>
     </div>
@@ -38,11 +38,18 @@ export default Vue.extend({
         }
     },
 
+    methods : {
+        viewDetails : function (job_id : string) {
+            const router_uri = `/job/${job_id}`
+            this.$router.push(router_uri)
+        }
+    },
+
     created : function () {
         this.$nuxt.$on('changeTheme', (data : boolean) => {
             this.lightThemeActive = data
         })
-    } 
+    }
 })
 
 </script>
