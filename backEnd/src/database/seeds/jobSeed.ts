@@ -12,6 +12,7 @@ export async function seed(knex: Knex): Promise<void> {
             description : 'this is work to Senior developer',
             technology : 'python',
             location: 'CE',
+            userId : 1
         },
 
         { 
@@ -20,6 +21,7 @@ export async function seed(knex: Knex): Promise<void> {
             description : 'this is work to Senior developer',
             technology : 'node',
             location: 'CE',
+            userId : 1
         },
         
         { 
@@ -28,6 +30,7 @@ export async function seed(knex: Knex): Promise<void> {
             description : 'this is work to Senior developer',
             technology : 'java',
             location: 'CE',
+            userId : 1
         },
     ]);
 };

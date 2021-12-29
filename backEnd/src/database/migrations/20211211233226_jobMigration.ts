@@ -9,6 +9,8 @@ export async function up(knex: Knex): Promise<void> {
         table.string('description')
         table.string('technology')
         table.string('location')
+        table.integer('userId').unsigned()
+        table.foreign('userId').references('users.userId').onDelete('CASCADE')
         table.timestamp('created_at').defaultTo(knex.fn.now())
     })
 }

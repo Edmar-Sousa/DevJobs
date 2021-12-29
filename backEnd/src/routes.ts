@@ -15,6 +15,7 @@ router.put   ('/jobs/:id', userController.authenticate, jobController.update)
 router.post  ('/jobs',     userController.authenticate, jobController.create)
 router.delete('/jobs/:id', userController.authenticate, jobController.delete)
 
-router.post('/user', userController.login)
+router.post('/register', userController.create)
+router.post('/login',    userController.login )
 
 export default router

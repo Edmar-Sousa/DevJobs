@@ -31,9 +31,25 @@ export class UserController {
             })
             .catch((err : any) => {
                 console.log(err)
-                return response.status(STATUS_INTERNAL_ERROR).json({ msg : 'usuario não encontrado'})
+                return response.status(STATUS_INTERNAL_ERROR).json({ msg : 'user not found'})
             })
     }
+
+    public create(request : Request, response : Response) {
+        const { userName, password, email } = request.body
+
+        if (!userName || !password || !email)
+            return response.status(STATUS_BAD_REQUEST).json({ msg : 'Register fields invalid' })
+
+        return knex('users').insert({ userName, password, email })
+            .then((data : any) => {
+                return response.status(STATUS_OK).json({ msg : 'User registed with success' })
+            })
+            .catch((err : any) => {
+                return response.status(STATUS_INTERNAL_ERROR).json({ msg : 'Error in register user' })
+            })
+    }
+    
 
     public authenticate(request : Request, response : Response, next : Function) {
         const jwt_token = request.headers['authorization']

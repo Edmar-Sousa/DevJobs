@@ -11,7 +11,8 @@ const STATUS_OK             = 200,
 
 export class JobController {
     public index(request : Request, response : Response) {
-        return knex.select('*').from('jobs')
+        return knex('jobs')
+            .join('users', 'jobs.userId', '=', 'users.userId').select('jobs.*', 'userName', 'email')
             .then((data : JobTable[]) => {
                 return response
                     .status(STATUS_OK)
@@ -32,13 +33,15 @@ export class JobController {
         if (!jobId)
             return response.status(STATUS_BAD_REQUEST).json({ message : 'Job id is required.' })
 
-        return knex.select('*').from('jobs').where({ jobId })
+        return knex('jobs')
+            .join('users', 'jobs.userId', '=', 'users.userId')
+            .where({ jobId })
+            .select('jobs.*', 'userName', 'email')
             .then((data : JobTable[]) => {
                 return response
                     .status(STATUS_OK)
                     .json(data)
             })
-
             .catch((err : any) => {
                 return response
                     .status(STATUS_INTERNAL_ERROR)
@@ -48,12 +51,12 @@ export class JobController {
 
 
     public create(request : Request, response : Response) {
-        const { title, time, description, technology, location } = request.body
+        const { userId, title, time, description, technology, location } = request.body
 
-        if (!title || !time || !description || !technology || !location)
+        if (!userId || !title || !time || !description || !technology || !location)
             return response.status(STATUS_BAD_REQUEST).json({ message : 'some fields is invalid.' })
 
-        return knex('jobs').insert({ title, time, description, technology, location })
+        return knex('jobs').insert({ userId, title, time, description, technology, location })
             .then((data : any) => {
                 return response
                     .status(STATUS_OK)
