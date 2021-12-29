@@ -8,11 +8,12 @@ const router = Router()
 const jobController  = new JobController()
 const userController = new UserController()
 
-router.get   ('/jobs',      jobController.index )
-router.get   ('/jobs/:id',  jobController.find  )
-router.put   ('/jobs/:id',  jobController.update)
-router.post  ('/jobs',      jobController.create)
-router.delete('/jobs/:id',  jobController.delete)
+
+router.get   ('/jobs',     userController.authenticate, jobController.index )
+router.get   ('/jobs/:id', userController.authenticate, jobController.find  )
+router.put   ('/jobs/:id', userController.authenticate, jobController.update)
+router.post  ('/jobs',     userController.authenticate, jobController.create)
+router.delete('/jobs/:id', userController.authenticate, jobController.delete)
 
 router.post('/user', userController.login)
 
