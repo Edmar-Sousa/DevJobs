@@ -1,7 +1,7 @@
 <template>
     <div class="form__container" v-bind:class="{ 'light' : lightThemeActive }">
         <div class="modal" v-if="showModal">
-            <h3><i class="far fa-check-circle"></i> JOB cadastrado com success</h3>
+            <h3><i class="far fa-check-circle"></i> JOB registred with success</h3>
         </div>
 
         <form v-on:submit.prevent>
@@ -36,7 +36,7 @@
             </div>
 
             <div class="form__fieldGroup align-right">
-                <button class="search__button" v-on:click="registerNewJob">Search</button>
+                <button class="search__button" v-on:click="registerNewJob">Register</button>
             </div>
         </form>
     </div>
@@ -101,7 +101,12 @@ export default Vue.extend({
                   time        = this.timeOfJob,
                   location    = this.localOfJob
 
-            this.$axios.$post('/jobs', { title, time, description, technology, location })
+            const token  = this.$store.state.token,
+                  userId = this.$store.state.userId
+
+            this.$axios.$post('/jobs', 
+                { userId, title, time, description, technology, location },
+                { headers : { 'Authorization' : `Bearer ${token}` } })
                 .then(response => {
                     this.showModalAndRedirect()
                 })

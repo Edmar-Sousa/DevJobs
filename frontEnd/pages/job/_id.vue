@@ -60,8 +60,13 @@ export default Vue.extend({
 
     created() {
         const job_id = this.$route.params.id
+        const token  = this.$store.state.token
 
-        this.$axios.$get(`/jobs/${job_id}`)
+        this.$axios.$get(`/jobs/${job_id}`, { 
+                headers : {
+                    'Authorization' : `Bearer ${token}`
+                }
+            })
             .then(response => {
                 this.create_at   = response[0].create_at
                 this.description = response[0].description

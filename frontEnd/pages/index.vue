@@ -7,6 +7,9 @@
             v-on:changeTime ="filterByTime"
         />
 
+        <nuxt-link to="/login">login</nuxt-link>
+        <nuxt-link to="/newJob">new</nuxt-link>
+
         <main class="jobs">
             <component 
                 v-for="(job, index) in filteredJobs"
@@ -95,7 +98,14 @@ export default Vue.extend({
     },
 
     created() {
-        this.$axios.$get('/jobs')
+        const token = this.$store.state.token
+
+        this.$axios.$get('/jobs', 
+            { 
+                headers : {
+                    'Authorization' : `Bearer ${token}`
+                }
+            })
             .then((response : any) => this.jobsList = response)
             .catch((err : any) => {
                 console.log(err)
