@@ -4,6 +4,8 @@
             <h3><i class="far fa-check-circle"></i> Registro registred with success</h3>
         </div>
 
+        <alert-component v-if="showMessage" v-bind:message="message" />
+
         <h2>DevJob - {{ loginOrRegister ? 'Login' : 'Register' }}</h2>
 
         <form v-on:submit.prevent>
@@ -69,6 +71,9 @@ export default Vue.extend({
             password : '',
             email    : '',
 
+            message     : '',
+            showMessage : false,
+
             lightThemeActive: false,
 
             showModal : false,
@@ -91,6 +96,12 @@ export default Vue.extend({
             this.email    = ''
         },
 
+        showErrorMessage : function () {
+            setTimeout(() => {
+                this.showMessage = false
+            }, 3000)
+        },
+
         loginAndRedirect : function () {
             const email    = this.email,
                   password = this.password
@@ -101,7 +112,9 @@ export default Vue.extend({
                     this.$router.replace('/')
                 })
                 .catch(err => {
-                    console.log(err)
+                    this.message = 'User or Password invalid!'
+                    this.showMessage = true
+                    this.showErrorMessage()
                 })
         },
 
@@ -148,6 +161,7 @@ div.modal {
 }
 
 div.form__container {
+    max-width: 600px;
     width: 90%;
     margin: 20px auto 0;
 

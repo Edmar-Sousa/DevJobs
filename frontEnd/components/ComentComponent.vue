@@ -1,5 +1,5 @@
 <template>
-    <div class="coment__container">
+    <div class="coment__container" v-bind:class="{ 'light' : theme }">
         <h3>Usuario tal</h3>
         <p class="createdAt">15:36 - 28/12/2021</p>
 
@@ -15,7 +15,8 @@
 import Vue from 'vue'
 
 export default Vue.extend({
-    name : 'coment-component'
+    name : 'coment-component',
+    props : ['theme']
 })
 
 </script>
@@ -31,6 +32,13 @@ div.coment__container {
 
     background: var(--background-dark-color2);
     color: var(--text-dark-theme-color);
+
+    transition: background 400ms;
+}
+
+div.coment__container.light {
+    background: var(--background-light-color2);
+    color: var(--text-light-theme-color);
 }
 
 div.coment__container p.createdAt {

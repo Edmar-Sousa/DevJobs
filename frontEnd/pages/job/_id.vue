@@ -1,17 +1,22 @@
 <template>
     <div>
-        <div class="view__details">
+        <div class="view__details" v-bind:class="{ 'light' : lightThemeActive }">
             <div class="view__header">
-                <span v-on:click="backPage" class="goBack"><i class="fas fa-arrow-left"></i> Back to previous page</span>
+                <span v-on:click="backPage" class="goBack">
+                    <i class="fas fa-arrow-left"></i> Back to previous page
+                </span>
             </div>
 
-            <h2 class="title">
-                {{ title }}
-            </h2>
+            <div>
+                <button class="trash">
+                    <i class="fas fa-trash"></i>
+                </button>
+            </div>
 
-            <p>
-                {{ create_at }}
-            </p>
+            <div class="header__details">
+                <h2 class="title">{{ title }}</h2>
+                <p>{{ create_at }}</p>
+            </div>
 
             <p class="description">
                 {{ description }}
@@ -28,9 +33,13 @@
             <p class="time">
                 <i class="fa fa-clock"></i> {{ time }}
             </p>
+
+            <div class="user__details">
+                <h4>Created: {{ createdByUser }}</h4>
+            </div>
         </div>
 
-        <coment-component />
+        <coment-component v-bind:theme="lightThemeActive" />
     </div>
 </template>
 
@@ -42,12 +51,16 @@ export default Vue.extend({
 
     data() {
         return {
+            lightThemeActive : false,
+
             create_at   : '',
             description : '',
             location    : '',
             technology  : '',
             time        : '',
-            title       : ''
+            title       : '',
+
+            createdByUser : ''
         }
     },
 
@@ -59,6 +72,12 @@ export default Vue.extend({
     },
 
     created() {
+        this.$nuxt.$on('changeTheme', (data : boolean) => {
+            this.lightThemeActive = data
+        })
+
+        this.createdByUser = this.$store.state.userName
+
         const job_id = this.$route.params.id
         const token  = this.$store.state.token
 
@@ -68,7 +87,7 @@ export default Vue.extend({
                 }
             })
             .then(response => {
-                this.create_at   = response[0].create_at
+                this.create_at   = response[0].created_at
                 this.description = response[0].description
                 this.location    = response[0].location
                 this.technology  = response[0].technology
@@ -93,6 +112,13 @@ div.view__details {
 
     padding: 10px;
     border-radius: 10px;
+
+    transition: background 400ms;
+}
+
+div.view__details.light {
+    background: var(--background-light-color2);
+    color: var(--text-light-theme-color);
 }
 
 div.view__header {
@@ -123,6 +149,41 @@ div.view__details p.description {
     text-align: justify;
     margin-bottom: 20px;
     margin-left: 0;
+}
+
+button.trash {
+    padding: 5px;
+    padding-left: 10px;
+
+    border-radius: 3px;
+    cursor: pointer;
+
+    background: none;
+    color: rgb(216, 25, 25);
+
+    border: 1px solid #0000;
+
+    text-align: center;
+}
+
+button.trash:hover {
+    border: 1px solid rgb(216, 25, 25);
+    box-shadow: 0 0 6px rgb(216, 25, 25);
+}
+
+div.view__details div.user__details {
+    width: 100%;
+    margin-top: 30px;
+}
+
+div.header__details {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+div.header__details p {
+    color: rgb(139, 139, 139);
 }
 
 </style>
