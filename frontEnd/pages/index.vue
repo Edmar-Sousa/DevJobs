@@ -7,8 +7,12 @@
             v-on:changeTime ="filterByTime"
         />
 
-        <nuxt-link to="/login">login</nuxt-link>
-        <nuxt-link to="/newJob">new</nuxt-link>
+        <div class="linkContainer">
+            <nuxt-link to="/newJob" class="newJob">
+                <i class="fas fa-plus-circle"></i>
+                create a new job
+            </nuxt-link>
+        </div>
 
         <main class="jobs">
             <component 
@@ -129,6 +133,21 @@ main.jobs {
     display: grid;
     grid-gap: 20px;
     grid-template-columns: repeat(auto-fit, minmax(290px, 1fr));
+}
+
+div.linkContainer {
+    width: 90%;
+    padding-top: 20px;
+    margin: auto;
+}
+
+a.newJob {
+    color: var(--primary-color);
+    text-decoration: none;
+}
+
+a.newJob:hover {
+    color: var(--hover-color);
 }
 
 /* end-jobs */

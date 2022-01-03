@@ -15,6 +15,7 @@ body {
 
 html {
     --primary-color: rgb(5, 184, 79);
+    --hover-color: rgb(5, 138, 60);
     --background-light-color: rgb(240, 240, 240);
     --background-dark-color: rgb(0, 10, 31);
 

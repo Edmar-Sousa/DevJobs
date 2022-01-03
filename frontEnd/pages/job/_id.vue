@@ -1,14 +1,10 @@
 <template>
     <div>
         <div class="view__details" v-bind:class="{ 'light' : lightThemeActive }">
-            <div class="view__header">
-                <span v-on:click="backPage" class="goBack">
-                    <i class="fas fa-arrow-left"></i> Back to previous page
-                </span>
-            </div>
+            <back-button-component />
 
-            <div>
-                <button class="trash">
+            <div v-if="userId == idUserLogin">
+                <button class="trash" v-on:click="deleteJob">
                     <i class="fas fa-trash"></i>
                 </button>
             </div>
@@ -53,14 +49,17 @@ export default Vue.extend({
         return {
             lightThemeActive : false,
 
+            jobId       : 0,
             create_at   : '',
             description : '',
             location    : '',
             technology  : '',
             time        : '',
             title       : '',
+            userId      : '',
 
-            createdByUser : ''
+            createdByUser : '',
+            idUserLogin : 0
         }
     },
 
@@ -69,6 +68,22 @@ export default Vue.extend({
             if (window.history.length > 1)
                  this.$router.go(-1)
         },
+
+        deleteJob : function () {
+            const token  = this.$store.state.token
+
+            this.$axios.$delete(`/jobs/${this.jobId}`, {
+                headers : {
+                    'Authorization' : `Bearer ${token}`
+                }
+            })
+            .then(response => {
+                this.$router.replace('/')
+            })
+            .catch(err => {
+                console.log(err)
+            })
+        }
     },
 
     created() {
@@ -76,10 +91,10 @@ export default Vue.extend({
             this.lightThemeActive = data
         })
 
-        this.createdByUser = this.$store.state.userName
-
         const job_id = this.$route.params.id
         const token  = this.$store.state.token
+
+        this.idUserLogin = this.$store.state.userId
 
         this.$axios.$get(`/jobs/${job_id}`, { 
                 headers : {
@@ -87,12 +102,15 @@ export default Vue.extend({
                 }
             })
             .then(response => {
-                this.create_at   = response[0].created_at
-                this.description = response[0].description
-                this.location    = response[0].location
-                this.technology  = response[0].technology
-                this.time        = response[0].time
-                this.title       = response[0].title
+                this.jobId         = response[0].jobId
+                this.userId        = response[0].userId
+                this.create_at     = response[0].created_at
+                this.description   = response[0].description
+                this.location      = response[0].location
+                this.technology    = response[0].technology
+                this.time          = response[0].time
+                this.title         = response[0].title
+                this.createdByUser = response[0].userName
             })
             .catch(err => {
                 console.log(err)
@@ -121,17 +139,6 @@ div.view__details.light {
     color: var(--text-light-theme-color);
 }
 
-div.view__header {
-    width: 100%;
-
-    display: flex;
-    justify-content: right;
-}
-
-div.view__details span.goBack {
-    cursor: pointer;
-    color: var(--primary-color);
-}
 
 div.view__details p {
     margin: 10px;

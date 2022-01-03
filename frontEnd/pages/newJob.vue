@@ -4,6 +4,8 @@
             <h3><i class="far fa-check-circle"></i> JOB registred with success</h3>
         </div>
 
+        <back-button-component />
+
         <form v-on:submit.prevent>
             <div class="form__fieldGroup">
                 <p>Title:</p>
