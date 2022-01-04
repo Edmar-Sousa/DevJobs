@@ -33,9 +33,26 @@
             <div class="user__details">
                 <h4>Created: {{ createdByUser }}</h4>
             </div>
+
+            <newComment-component 
+                v-bind:jobId="jobId" 
+                v-on:newComment="addNewComment"/>
         </div>
 
-        <coment-component v-bind:theme="lightThemeActive" />
+        <component 
+            v-for="(comment, index) in commentsList"
+            v-bind:key="index"
+            v-bind:is="'coment-component'"
+            v-bind:theme="lightThemeActive"
+            v-bind:userId="comment.userId"
+            v-bind:userName="comment.userName"
+            v-bind:body="comment.body"
+            v-bind:commentId="comment.commentId"
+            v-bind:created_at="comment.created_at"
+            >
+        </component>
+
+
     </div>
 </template>
 
@@ -59,7 +76,11 @@ export default Vue.extend({
             userId      : '',
 
             createdByUser : '',
-            idUserLogin : 0
+            idUserLogin : 0,
+
+            commentsList : [],
+
+            body : ''
         }
     },
 
@@ -67,6 +88,10 @@ export default Vue.extend({
         backPage : function () {
             if (window.history.length > 1)
                  this.$router.go(-1)
+        },
+
+        addNewComment : function (comment : any) {
+            this.commentsList.push(comment)
         },
 
         deleteJob : function () {
@@ -102,15 +127,16 @@ export default Vue.extend({
                 }
             })
             .then(response => {
-                this.jobId         = response[0].jobId
-                this.userId        = response[0].userId
-                this.create_at     = response[0].created_at
-                this.description   = response[0].description
-                this.location      = response[0].location
-                this.technology    = response[0].technology
-                this.time          = response[0].time
-                this.title         = response[0].title
-                this.createdByUser = response[0].userName
+                this.jobId         = response.jobId
+                this.userId        = response.userId
+                this.create_at     = response.created_at
+                this.description   = response.description
+                this.location      = response.location
+                this.technology    = response.technology
+                this.time          = response.time
+                this.title         = response.title
+                this.createdByUser = response.userName
+                this.commentsList  = response.commentsList
             })
             .catch(err => {
                 console.log(err)
