@@ -1,4 +1,6 @@
 interface TypeUser {
+    lightThemeActive : boolean
+    
     created_at : string
     email      : string
     token      : string
@@ -12,9 +14,14 @@ export const state = () => {
     userName   : ''
     token      : ''
     userId     : 0
+    lightThemeActive : false
 }
 
 export const mutations = {
+    setTheme(state : TypeUser, data : boolean) : void {
+        state.lightThemeActive = data
+    },
+
     login(state : TypeUser, data : TypeUser) : void {
         state.created_at = data.created_at
         state.email      = data.email

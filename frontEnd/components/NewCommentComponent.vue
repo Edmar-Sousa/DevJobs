@@ -22,6 +22,8 @@ export default Vue.extend({
     },
 
     created() {
+        this.lightThemeActive = this.$store.state.lightThemeActive
+
         this.$nuxt.$on('changeTheme', (data : boolean) => {
             this.lightThemeActive = data
         })
