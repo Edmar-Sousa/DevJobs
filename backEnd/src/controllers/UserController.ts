@@ -17,10 +17,13 @@ export class UserController {
         if (!password || !email)
             return response.status(STATUS_BAD_REQUEST).json({ msg : 'invalid fields of request' })
 
-        return knex.select('*').from('users')
+        knex.select('*').from('users')
             .where({password, email})
-            .then((data : any) => {
+            .then((data : any[]) => {
                 
+                if (data.length == 0)
+                    return response.status(STATUS_BAD_REQUEST).json({ msg : 'User not found' })
+
                 json_web_token_module.sign({ password, email }, SECRET_KEY, { expiresIn : '4h' }, (err, token) => {
                     if (err)
                         return response.status(STATUS_INTERNAL_ERROR).json({ msg : 'Error in generated token' })

@@ -1,9 +1,7 @@
 <template>
-    <div class="newComment__container">
+    <div class="newComment__container" v-bind:class="{ 'light' : lightThemeActive }">
         <h5>New comment:</h5>
-        
         <textarea class="comment__body" v-model="body"></textarea>
-        
         <button class="AddComment" v-on:click="addComment">Add Comment</button>
     </div>
 </template>
@@ -18,8 +16,15 @@ export default Vue.extend({
 
     data() {
         return {
+            lightThemeActive : false,
             body : ''
         }
+    },
+
+    created() {
+        this.$nuxt.$on('changeTheme', (data : boolean) => {
+            this.lightThemeActive = data
+        })
     },
 
     methods : {
@@ -77,6 +82,10 @@ div.newComment__container textarea {
 
     border: 1px solid rgba(0, 0, 0, 0.493);
     border-radius: 5px;
+}
+
+div.newComment__container.light textarea {
+    color: var(--text-light-theme-color);
 }
 
 div.newComment__container button.AddComment {

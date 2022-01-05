@@ -1,7 +1,6 @@
 import { Request, Response } from 'express'
 
 import knex from './../database/connection'
-import { JobTable } from './../types'
 
 
 const STATUS_OK             = 200,
@@ -13,7 +12,7 @@ export class JobController {
     public index(request : Request, response : Response) {
         return knex('jobs')
             .join('users', 'jobs.userId', '=', 'users.userId').select('jobs.*', 'userName', 'email')
-            .then((data : JobTable[]) => {
+            .then((data : any) => {
                 return response
                     .status(STATUS_OK)
                     .json(data)
@@ -37,10 +36,21 @@ export class JobController {
             .join('users', 'jobs.userId', '=', 'users.userId')
             .where({ jobId })
             .select('jobs.*', 'userName', 'email')
-            .then((data : JobTable[]) => {
-                return response
-                    .status(STATUS_OK)
-                    .json(data)
+            .then((jobsList : any) => {
+                
+                return knex('comments')
+                    .join('users', 'comments.userId', '=', 'users.userId')
+                    .select('comments.*', 'users.userName')
+                    .where({ jobId })
+                    .then((commentsList : any) => {
+                        return response.status(STATUS_OK).json({ ...jobsList[0], commentsList })
+                    })
+                    .catch((err : any) => {
+                        return response
+                            .status(STATUS_INTERNAL_ERROR)
+                            .json({ message : 'Error of consult database.' })
+                    })
+
             })
             .catch((err : any) => {
                 return response

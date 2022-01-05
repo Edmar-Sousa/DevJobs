@@ -1,7 +1,7 @@
 <template>
     <div class="jobs__card" v-bind:class="{ 'light' : this.lightThemeActive }">
         <div class="jobs__card--icon">
-            <i class="fab fa-python"></i>
+            <i class="fas fa-microchip"></i>
         </div>
 
         <div>
@@ -121,7 +121,7 @@ p.jobs__card--info {
     width: 45px;
     height: 45px;
 
-    padding: 5px 7px;
+    padding: 5px;
 
     background: rgb(197, 132, 10);
     border-radius: 10px;

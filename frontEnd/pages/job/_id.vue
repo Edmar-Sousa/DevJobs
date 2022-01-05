@@ -90,7 +90,7 @@ export default Vue.extend({
                  this.$router.go(-1)
         },
 
-        addNewComment : function (comment : any) {
+        addNewComment : function (comment : never) {
             this.commentsList.push(comment)
         },
 
