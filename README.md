@@ -1,11 +1,11 @@
 # devjob
 
 ### login
-<img src="imgReadme/login.png">
+<img src="frontEnd/imgReadme/login.png">
 
 
 ### index
-<img src="imgReadme/index.png">
+<img src="frontEnd/imgReadme/index.png">
 
 ## Build
 
